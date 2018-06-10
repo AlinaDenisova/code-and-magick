@@ -22,18 +22,18 @@ var getRandomData = function (arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 };
 
-var randomWizards = function (wisardCount) {
-  var wisardsArr = [];
-  for (var i = 0; i < wisardCount; i++) {
+var randomWizards = function (wizardCount) {
+  var wizardsArr = [];
+  for (var i = 0; i < wizardCount; i++) {
     var randomName = getRandomData(WIZARD_NAMES) + ' ' + getRandomData(WIZARD_LAST_NAMES);
     var wizard = {
       name: randomName,
       coatColor: getRandomData(WIZARD_COAT_COLOR),
       eyesColor: getRandomData(WIZARD_EYES_COLOR)
     };
-    wisardsArr.push(wizard);
+    wizardsArr.push(wizard);
   }
-  return wisardsArr;
+  return wizardsArr;
 };
 
 wizards = randomWizards(WIZARD_COUNT);
@@ -48,10 +48,14 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-var fragment = document.createDocumentFragment();
-for (var i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
-}
-similarListElement.appendChild(fragment);
+var renderFragment = function () {
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < wizards.length; i++) {
+    fragment.appendChild(renderWizard(wizards[i]));
+  }
+  similarListElement.appendChild(fragment);
+};
+
+renderFragment();
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
