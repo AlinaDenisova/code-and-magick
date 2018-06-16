@@ -106,7 +106,6 @@ setupClose.addEventListener('keydown', function (evt) {
 });
 
 // валидация имени персонажа
-
 var userNameInput = setup.querySelector('.setup-user-name');
 
 userNameInput.addEventListener('invalid', function () {
@@ -139,14 +138,14 @@ var wizardEyes = userWizard.querySelector('.wizard-eyes');
 var wizardFireball = setup.querySelector('.setup-fireball-wrap');
 
 wizardCoat.addEventListener('click', function () {
-  wizardCoat.style.fill = WIZARD_COAT_COLOR[Math.floor(Math.random() * WIZARD_COAT_COLOR.length)];
+  wizardCoat.style.fill = getRandomData(WIZARD_COAT_COLOR);
 });
 
 wizardEyes.addEventListener('click', function () {
-  wizardEyes.style.fill = WIZARD_EYES_COLOR[Math.floor(Math.random() * WIZARD_EYES_COLOR.length)];
+  wizardEyes.style.fill = getRandomData(WIZARD_EYES_COLOR);
 });
 
 wizardFireball.addEventListener('click', function () {
-  wizardFireball.style.backgroundColor = WIZARD_FIREBALL_COLOR[Math.floor(WIZARD_FIREBALL_COLOR.length * Math.random())];
+  wizardFireball.style.backgroundColor = getRandomData(WIZARD_FIREBALL_COLOR);
 });
 
