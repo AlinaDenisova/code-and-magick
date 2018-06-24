@@ -37,14 +37,15 @@
   // массив объектов волшебников
   var getRandomWizards = function (wizardCount) {
     var wizardsArr = [];
+    var wizard = {};
     for (var i = 0; i < wizardCount; i++) {
       var randomName = getRandomData(window.constants.WIZARD_NAMES) + ' ' + getRandomData(window.constants.WIZARD_LAST_NAMES);
-      window.wizard = {
+      wizard = {
         name: randomName,
         coatColor: getRandomData(window.constants.WIZARD_COAT_COLOR),
         eyesColor: getRandomData(window.constants.WIZARD_EYES_COLOR)
       };
-      wizardsArr.push(window.wizard);
+      wizardsArr.push(wizard);
     }
     return wizardsArr;
   };

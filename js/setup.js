@@ -14,8 +14,7 @@
   wizards = window.util.getRandomWizards(window.constants.WIZARD_COUNT);
 
   // отрисовка волшебников
-  var renderWizard = function () {
-    var wizard = window.wizard;
+  var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
