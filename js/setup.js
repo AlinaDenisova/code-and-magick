@@ -2,9 +2,6 @@
 
 // отрисовка похожих волшебников
 (function () {
-  var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-  var WIZARD_LAST_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-  var WIZARD_COUNT = 4;
 
   // отображение окна настройки персонажа
   var setup = document.querySelector('.setup');
@@ -12,28 +9,13 @@
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
       .content
       .querySelector('.setup-similar-item');
-
   var wizards = [];
 
-  // массив объектов волшебников
-  var randomWizards = function (wizardCount) {
-    var wizardsArr = [];
-    for (var i = 0; i < wizardCount; i++) {
-      var randomName = window.util.getRandomData(WIZARD_NAMES) + ' ' + window.util.getRandomData(WIZARD_LAST_NAMES);
-      var wizard = {
-        name: randomName,
-        coatColor: window.util.getRandomData(window.constants.WIZARD_COAT_COLOR),
-        eyesColor: window.util.getRandomData(window.constants.WIZARD_EYES_COLOR)
-      };
-      wizardsArr.push(wizard);
-    }
-    return wizardsArr;
-  };
-
-  wizards = randomWizards(WIZARD_COUNT);
+  wizards = window.util.getRandomWizards(window.constants.WIZARD_COUNT);
 
   // отрисовка волшебников
-  var renderWizard = function (wizard) {
+  var renderWizard = function () {
+    var wizard = window.wizard;
     var wizardElement = similarWizardTemplate.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
@@ -54,4 +36,14 @@
   renderFragment();
 
   setup.querySelector('.setup-similar').classList.remove('hidden');
+
+  // изменение цвета параметров персонажа при нажатии
+  var userWizard = setup.querySelector('.wizard');
+  var wizardCoat = userWizard.querySelector('.wizard-coat');
+  var wizardEyes = userWizard.querySelector('.wizard-eyes');
+  var wizardFireball = setup.querySelector('.setup-fireball-wrap');
+
+  window.util.getColorize(window.constants.WIZARD_COAT_COLOR, wizardCoat);
+  window.util.getColorize(window.constants.WIZARD_EYES_COLOR, wizardEyes);
+  window.util.getColorize(window.constants.WIZARD_FIREBALL_COLOR, wizardFireball);
 })();
