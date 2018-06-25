@@ -34,22 +34,6 @@
     return arr[Math.floor(Math.random() * arr.length)];
   };
 
-  // массив объектов волшебников
-  var getRandomWizards = function (wizardCount) {
-    var wizardsArr = [];
-    var wizard = {};
-    for (var i = 0; i < wizardCount; i++) {
-      var randomName = getRandomData(window.constants.WIZARD_NAMES) + ' ' + getRandomData(window.constants.WIZARD_LAST_NAMES);
-      wizard = {
-        name: randomName,
-        coatColor: getRandomData(window.constants.WIZARD_COAT_COLOR),
-        eyesColor: getRandomData(window.constants.WIZARD_EYES_COLOR)
-      };
-      wizardsArr.push(wizard);
-    }
-    return wizardsArr;
-  };
-
   // изменение цвета при нажатии
   var getColorize = function (arr, element) {
     element.addEventListener('click', function () {
@@ -67,7 +51,6 @@
     isEnterEvent: isEnterEvent,
     getRandomData: getRandomData,
     getMaxElement: getMaxElement,
-    getRandomWizards: getRandomWizards,
     getColorize: getColorize
   };
 })();
