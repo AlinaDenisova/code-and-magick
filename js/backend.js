@@ -2,7 +2,6 @@
 
 // загрузка похожих волшебников с сервера
 (function () {
-  var URL = 'https://js.dump.academy/code-and-magick';
 
   // обработка ошибок
   var setup = function (onLoad, onError) {
@@ -28,14 +27,14 @@
   // загрузка данных с сервера
   var load = function (onLoad, onError) {
     var xhr = setup(onLoad, onError);
-    xhr.open('GET', URL + '/data');
+    xhr.open('GET', window.constants.URL + '/data');
     xhr.send();
   };
 
   // отправка данных на сервер
   var save = function (data, onLoad, onError) {
     var xhr = setup(onLoad, onError);
-    xhr.open('POST', URL);
+    xhr.open('POST', window.constants.URL);
     xhr.send(data);
   };
 
