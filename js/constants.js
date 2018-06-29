@@ -20,6 +20,7 @@
     WIZARD_EYES_COLOR: ['black', 'red', 'blue', 'yellow', 'green'],
     WIZARD_FIREBALL_COLOR: ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'],
     DEBOUNCE_INTERVAL: 300,
-    URL: 'https://js.dump.academy/code-and-magick'
+    URL: 'https://js.dump.academy/code-and-magick',
+    FILE_TYPES: ['gif', 'jpg', 'jpeg', 'png']
   };
 })();
