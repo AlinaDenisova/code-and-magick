@@ -36,26 +36,31 @@
   var wizardEyes = document.querySelector('.wizard-eyes');
   var wizardFireball = setup.querySelector('.setup-fireball-wrap');
 
-  var wizard = {
-    onEyesChange: function (color) {},
-    onCoatChange: function (color) {}
+  var userWizard = {
+    onEyesChange: function (color) {
+      return color;
+    },
+    onCoatChange: function (color) {
+      return color;
+    }
   };
 
   wizardCoat.addEventListener('click', function () {
     var color = window.util.getRandomData(window.constants.WIZARD_COAT_COLOR);
     wizardCoat.style.fill = color;
-    wizard.onCoatChange(color);
+    userWizard.onCoatChange(color);
   });
 
   wizardEyes.addEventListener('click', function () {
     var color = window.util.getRandomData(window.constants.WIZARD_EYES_COLOR);
     wizardEyes.style.fill = color;
-    wizard.onEyesChange(color);
+    userWizard.onEyesChange(color);
   });
 
-  // window.util.getColorize(window.constants.WIZARD_COAT_COLOR, wizardCoat);
-  // window.util.getColorize(window.constants.WIZARD_EYES_COLOR, wizardEyes);
-  window.util.getColorize(window.constants.WIZARD_FIREBALL_COLOR, wizardFireball);
+  wizardEyes.addEventListener('click', function () {
+    var color = window.util.getRandomData(window.constants.WIZARD_FIREBALL_COLOR);
+    wizardFireball.style.fill = color;
+  });
 
   // отрисовка похожих волшебников
   var coatColor;
@@ -74,23 +79,32 @@
     return rank;
   };
 
-  var updateWizards = function () {
-    render(wizards.slice().
-      sort(function (left, right) {
-        var rankDiff = getRank(right) - getRank(left);
-        if (rankDiff === 0) {
-          rankDiff = wizards.indexOf(left) - wizards.indexOf(right);
-        }
-        return rankDiff;
-      }));
+  var namesComparator = function (left, right) {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    } else {
+      return 0;
+    }
   };
 
-  wizard.onEyesChange = window.util.debounce(function (color) {
+  var updateWizards = function () {
+    render(wizards.sort(function (left, right) {
+      var rankDiff = getRank(right) - getRank(left);
+      if (rankDiff === 0) {
+        rankDiff = namesComparator(left.name, right.name);
+      }
+      return rankDiff;
+    }));
+  };
+
+  userWizard.onEyesChange = window.util.debounce(function (color) {
     eyesColor = color;
     updateWizards();
   });
 
-  wizard.onCoatChange = window.util.debounce(function (color) {
+  userWizard.onCoatChange = window.util.debounce(function (color) {
     coatColor = color;
     updateWizards();
   });

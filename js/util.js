@@ -34,18 +34,6 @@
     return arr[Math.floor(Math.random() * arr.length)];
   };
 
-  // изменение цвета при нажатии
-  var getColorize = function (arr, element) {
-    element.addEventListener('click', function () {
-      var color = getRandomData(arr);
-      if (element.tagName.toLowerCase() === 'div') {
-        element.style.backgroundColor = color;
-      } else {
-        element.style.fill = color;
-      }
-    });
-  };
-
   // устранение "дребезга"
   var debounce = function (fun) {
     var lastTimeout = null;
@@ -65,7 +53,6 @@
     isEnterEvent: isEnterEvent,
     getRandomData: getRandomData,
     getMaxElement: getMaxElement,
-    getColorize: getColorize,
     debounce: debounce
   };
 })();
