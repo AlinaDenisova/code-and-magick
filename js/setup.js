@@ -2,6 +2,9 @@
 
 // отрисовка похожих волшебников
 (function () {
+  var constants = window.constants;
+  var backend = window.backend;
+  var util = window.util;
 
   // отрисовка волшебников
   var setup = document.querySelector('.setup');
@@ -23,7 +26,7 @@
   };
 
   var render = function (data) {
-    var takeNumber = data.length > window.constants.WIZARD_COUNT ? window.constants.WIZARD_COUNT : data.length;
+    var takeNumber = data.length > constants.WIZARD_COUNT ? constants.WIZARD_COUNT : data.length;
     similarListElement.innerHTML = '';
     for (var i = 0; i < takeNumber; i++) {
       similarListElement.appendChild(renderWizard(data[i]));
@@ -45,21 +48,33 @@
     }
   };
 
+  var getColorize = function (arr, element) {
+    element.addEventListener('click', function () {
+      var color = util.getRandomData(arr);
+      if (element.tagName.toLowerCase() === 'div') {
+        element.style.backgroundColor = color;
+      } else {
+        element.style.fill = color;
+      }
+
+      if (element.classList.contains('wizard-coat')) {
+        userWizard.onCoatChange(color);
+      } else if (element.classList.contains('wizard-eyes')) {
+        userWizard.onEyesChange(color);
+      }
+    });
+  };
+
   wizardCoat.addEventListener('click', function () {
-    var color = window.util.getRandomData(window.constants.WIZARD_COAT_COLOR);
-    wizardCoat.style.fill = color;
-    userWizard.onCoatChange(color);
+    getColorize(constants.WIZARD_COAT_COLOR, wizardCoat);
   });
 
   wizardEyes.addEventListener('click', function () {
-    var color = window.util.getRandomData(window.constants.WIZARD_EYES_COLOR);
-    wizardEyes.style.fill = color;
-    userWizard.onEyesChange(color);
+    getColorize(constants.WIZARD_EYES_COLOR, wizardEyes);
   });
 
   wizardEyes.addEventListener('click', function () {
-    var color = window.util.getRandomData(window.constants.WIZARD_FIREBALL_COLOR);
-    wizardFireball.style.fill = color;
+    getColorize(constants.WIZARD_FIREBALL_COLOR, wizardFireball);
   });
 
   // отрисовка похожих волшебников
@@ -99,12 +114,12 @@
     }));
   };
 
-  userWizard.onEyesChange = window.util.debounce(function (color) {
+  userWizard.onEyesChange = util.debounce(function (color) {
     eyesColor = color;
     updateWizards();
   });
 
-  userWizard.onCoatChange = window.util.debounce(function (color) {
+  userWizard.onCoatChange = util.debounce(function (color) {
     coatColor = color;
     updateWizards();
   });
@@ -124,10 +139,12 @@
   };
 
   form.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(form), formReset, window.backend.errorHandler);
+    backend.save(new FormData(form), formReset, backend.errorHandler);
     evt.preventDefault();
   });
 
   // загрузка данных с сервера
-  window.backend.load(successHandler, window.backend.errorHandler);
+  backend.load(successHandler, backend.errorHandler);
 })();
+
+
