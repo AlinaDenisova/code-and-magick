@@ -2,12 +2,13 @@
 
 // открытие/закрытие окна настройки персонажа
 (function () {
+  var util = window.util;
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
 
   var onPopupEscPress = function (evt) {
-    window.util.isEscEvent(evt, closePopup);
+    util.isEscEvent(evt, closePopup);
   };
 
   var openPopup = function () {
@@ -25,7 +26,7 @@
   });
 
   setupOpen.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, openPopup);
+    util.isEnterEvent(evt, openPopup);
   });
 
   setupClose.addEventListener('click', function () {
@@ -33,6 +34,6 @@
   });
 
   setupClose.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, closePopup);
+    util.isEnterEvent(evt, closePopup);
   });
 })();
