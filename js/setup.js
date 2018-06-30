@@ -37,7 +37,7 @@
   var wizardFireball = setup.querySelector('.setup-fireball-wrap');
 
   var wizard = {
-    onEyesChange: function (сolor) {},
+    onEyesChange: function (color) {},
     onCoatChange: function (color) {}
   };
 
