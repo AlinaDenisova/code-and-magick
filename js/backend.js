@@ -2,7 +2,7 @@
 
 // загрузка похожих волшебников с сервера
 (function () {
-  var URL = 'https://js.dump.academy/code-and-magick';
+  var URL = 'https://javascript.pages.academy/code-and-magick';
 
   // обработка ошибок
   var setup = function (onLoad, onError) {
